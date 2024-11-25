@@ -6,7 +6,9 @@ describe('Login Feature', () =>  {
         cy.get('h5').contains('Login').should('have.text','Login');
         cy.get('[name="username"]').type('Admin');
         cy.get('[name="password"]').type('admin123');
+        cy.intercept('GET','**/action-summary').as('actionSummary');
         cy.get('[type="submit"]').click();
+        cy.wait('@actionSummary');
         cy.get('h6').contains('Dashboard').should('have.text','Dashboard');
     }) 
 })
@@ -30,7 +32,9 @@ describe('Login Feature', () =>  {
         cy.get('h5').contains('Login').should('have.text','Login');
         cy.get('[name="username"]').type('admin');
         cy.get('[name="password"]').type('admin123');
+        cy.intercept('GET','**/action-summary').as('actionSummary');
         cy.get('[type="submit"]').click();
+        cy.wait('@actionSummary');
         cy.get('h6').contains('Dashboard').should('have.text','Dashboard');
     }) 
 })
